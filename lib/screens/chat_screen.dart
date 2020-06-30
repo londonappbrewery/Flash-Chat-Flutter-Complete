@@ -21,8 +21,13 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-
     getCurrentUser();
+  }
+  
+  @override
+  void dispose() {
+    super.dispose();
+    messageTextController.dispose();
   }
 
   void getCurrentUser() async {
@@ -65,18 +70,15 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      controller: messageTextController,
-                      onChanged: (value) {
-                        messageText = value;
-                      },
+                      controller: messageTextController,                      
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
                   FlatButton(
                     onPressed: () {
                       messageTextController.clear();
-                      _firestore.collection('messages').add({
-                        'text': messageText,
+                      _firestore.collection('messages').add({                        
+                        'text': messageTextController.text,
                         'sender': loggedInUser.email,
                       });
                     },
