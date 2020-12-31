@@ -6,7 +6,6 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw new FileNotFoundException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
@@ -39,6 +38,7 @@ android {
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
         multiDexEnabled true
     }
 
@@ -56,5 +56,9 @@ flutter {
 }
 
 dependencies {
-    implementation 'androidx.multidex:multidex:2.0.0'
+
+    implementation 'com.google.firebase:firebase-firestore:21.3.1'
+
 }
+
+apply plugin: 'com.google.gms.google-services'
