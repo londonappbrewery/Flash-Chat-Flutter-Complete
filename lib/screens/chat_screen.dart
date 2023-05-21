@@ -111,8 +111,8 @@ class MessagesStream extends StatelessWidget {
         final messages = snapshot.data.documents.reversed;
         List<MessageBubble> messageBubbles = [];
         for (var message in messages) {
-          final messageText = message.data['text'];
-          final messageSender = message.data['sender'];
+          final messageText = (message.data() as Map<String>, dynamic)['text'];
+          final messageSender = (message.data() as Map<String>, dynamic)['sender'];
 
           final currentUser = loggedInUser.email;
 
